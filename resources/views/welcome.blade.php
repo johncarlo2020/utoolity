@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" integrity="sha256-0H3Nuz3aug3afVbUlsu12Puxva3CP4EhJtPExqs54Vg=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>uTOOLity</title>
     <style>
         html, body, div, span, applet, object, iframe,
@@ -492,7 +493,7 @@
                         <h1>POWER</h1>
                         <div id="top-container">
                             <div id="ac-breaker">
-                                <a href="#"><button id="ACUBreakerButton" type="submit" name="btPowerOn" onclick="ACUBreaker()"><i class="fa fa-bolt" aria-hidden="true"></i></button></a>
+                                <button id="ACUBreakerButton" type="button"  name="btPowerOn" ><i class="fa fa-bolt" aria-hidden="true"></i></button>
                                 <p>ACU</p>
                             </div>
 
@@ -534,5 +535,34 @@
             </div>
         </main>
     </form>
+    <script>
+         $(document).ready(function() {
+            $(document).on("click", "#ACUBreakerButton", function () {
+
+                    // Define the URL of your Laravel API endpoint
+                    var apiUrl = "http://31.187.75.224/traykpila-api/public/api/trigger";
+
+                    // Create the JSON payload with the trigger data
+                    var jsonData = { button_status: "pressed" };
+
+                    // Send a POST request to the Laravel API endpoint
+                    $.ajax({
+                        url: apiUrl,
+                        type: "POST",
+                        data: jsonData,
+                        dataType: "json",
+                        success: function(response) {
+                            // Handle the success response from the Laravel API
+                            console.log("Trigger sent successfully!", response);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle the error response from the Laravel API
+                            console.error("Error sending trigger:", status, error);
+                        }
+                    });
+
+            });
+         });
+    </script>
 </body>
 </html>
