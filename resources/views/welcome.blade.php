@@ -540,7 +540,7 @@
             $(document).on("click", "#ACUBreakerButton", function () {
 
                     // Define the URL of your Laravel API endpoint
-                    var apiUrl = "http://31.187.75.224/traykpila-api/public/api/trigger";
+                    var apiUrl = "http://31.187.75.224/utoolity/public/api/trigger";
 
                     // Create the JSON payload with the trigger data
                     var jsonData = { button_status: "pressed" };
